@@ -26,102 +26,94 @@ const app = new Vue({
         id: 5,
         value: 'XXL',
         is_selected: false,
-      }
+      },
     ],
     products: [
       {
         id: 1,
         title: 'Футболка',
         price: 1500,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
         is_modal_open: false,
-        image_path: 'images/image 3.png'
+        image_path: 'assets/images/image 3.png',
       },
       {
         id: 2,
         title: 'Кепка',
         price: 1500,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
         is_modal_open: false,
-        image_path: 'images/image 2.png'
+        image_path: 'assets/images/image 2.png',
       },
       {
         id: 3,
         title: 'Кепка',
         price: 1500,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
         is_modal_open: false,
-        image_path: 'images/image 4.png'
+        image_path: 'assets/images/image 4.png',
       },
       {
         id: 4,
         title: 'Кепка',
         price: 1500,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
         is_modal_open: false,
-        image_path: 'images/image 5.png'
+        image_path: 'assets/images/image 5.png',
       },
       {
         id: 5,
         title: 'Кепка',
         price: 1500,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
         is_modal_open: false,
-        image_path: 'images/image 6.png'
+        image_path: 'assets/images/image 6.png',
       },
       {
         id: 6,
         title: 'Кепка',
         price: 1500,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
         is_modal_open: false,
-        image_path: 'images/image 7.png'
+        image_path: 'assets/images/image 7.png',
       },
       {
         id: 7,
         title: 'Кепка',
         price: 1500,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
         is_modal_open: false,
-        image_path: 'images/image 8.png'
+        image_path: 'assets/images/image 8.png',
       },
       {
         id: 8,
         title: 'Кепка',
         price: 1500,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
         is_modal_open: false,
-        image_path: 'images/image 9.png'
-      }
-
+        image_path: 'assets/images/image 9.png',
+      },
     ],
-    basket: [
-      {
-        id: 1,
-        title: 'Футболка',
-        price: 1500,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
-        is_modal_open: false,
-        image_path: 'images/image 3.png'
-      }
-     ],
-    message: 'В корзину',
-    message1: 'Начать оформление',
-    counter: 10
+    cart: [],
+    amount: 1,
+    is_cart_open: false,
   },
   computed: {
     opened_product() {
       const [product] = this.products.filter(p => p.is_modal_open);
       return product || null;
     },
-    opened_basket() {
-      const [order] = this.basket.filter(b => b.is_modal_open);
-      return order || null;
+    cart_total_amount() {
+      return this.cart.reduce((acc, product) => acc += (product.price * product.amount), 0) || 0;
     },
-    opened_order() {
-      const [form] = this.basket.filter(o => o.is_modal_open);
-      return form || null;
-    }
   },
   methods: {
     toggle_dialog(id) {
@@ -142,32 +134,24 @@ const app = new Vue({
         }
       });
     },
-    toggle_cart(id) {
-      this.basket.map(b => {
-        if (b.id == id) {
-          b.is_modal_open = !b.is_modal_open;
-        } else {
-          b.is_modal_open = false;
-        }
-      });
+    calculate_product_price(product) {
+      return product.price * product.amount;
     },
-    make_order(){
-      this.basket.map(o => {
-        if (o.id == id) {
-          o.is_modal_open = !o.is_modal_open;
-        } else {
-          o.is_modal_open = false;
-        }
-      });
+    increment_amount() {
+      this.amount++;
     },
-    incrementValue() {
-      this.counter++;
+    decrement_amount() {
+      this.amount--;
     },
-    decrementValue() {
-      this.counter--;
+    add_to_cart() {
+      if (this.amount > 0) {
+        const size = this.sizes.filter(s => s.is_selected)[0].value;
+        const data = { ...this.opened_product, size, amount: this.amount }
+        this.cart.push(data);
+      }
     },
-    addProductToBasket(){
-      this.basket.push(this.opened_product);
+    toggle_cart() {
+      this.is_cart_open = !this.is_cart_open;
     }
-  }
+  },
 });
