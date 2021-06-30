@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IKHome</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/css/ik_merch.css" />
+    <script type="text/x-template" id="modal-template">
+      <transition name="modal">
+        <div class="modal-mask">
+          <div class="modal-wrapper">
+            <div class="modal-container">
+
+              <div class="modal-header">
+                <slot name="header">
+                  default header
+                </slot>
+              </div>
+
+              <div class="modal-body">
+                <slot name="body">
+                  default body
+                </slot>
+              </div>
+
+              <div class="modal-footer">
+                <slot name="footer">
+                  default footer
+                  <button class="modal-default-button" @click="$emit('close')">
+                    OK
+                  </button>
+                </slot>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
+    </script>
+  </head>
+  <body>
+    <div class="wrapper" id="app">
+      <div class="header">
+        <div class="header__column">
+          <a class="header__logo" href="#"></a>
+        </div>
+        <div class="header__column">
+          <a class="header__gost" href="#"></a>
+        </div>
+      </div>
+      <div class="merch">
+        <div class="merch__container">
+          <div class="merch__row">
+            <img class="merch__element" 
+                v-for="product in products" 
+                :key="product.id" 
+                :src="product.image_path" 
+                @click="toggle_dialog(product.id)" />
+          </div>
+        </div>
+        <div class="merch__pagination">
+            <a class="merch__nav-element">← Назад</a>
+            <a class="merch__nav-element">1</a>
+            <a class="merch__nav-element">2</a>
+            <a class="merch__nav-element">3</a>
+            <a class="merch__nav-element">...</a>
+            <a class="merch__nav-element">7</a>
+            <a class="merch__nav-element">8</a>
+            <a class="merch__nav-element">9</a>
+            <a class="merch__nav-element">Вперед →</a>
+        </div>
+        </div>
+      <div class="footer">
+          <div class="footer__social-links">
+            <a class="footer__link footer__icon footer__icon--instagram"></a>
+            <a class="footer__link footer__icon footer__icon--vkontakte"></a>
+            <a class="footer__link footer__icon footer__icon--youtube"></a>
+          </div>
+          <div class="footer__menu-links">
+            <a class="footer__menu-link" href="ik_about.html"> О группе </a>
+            <a class="footer__menu-link" href="#"> Мерч </a>
+            <a class="footer__menu-link" href="#"> Музыка </a>
+            <a class="footer__menu-link" href="ik_media.html"> Медиа </a>
+            <a class="footer__menu-link" href="ik_contact.html"> Контакты </a>
+            <a class="footer__menu-link"
+             v-for="order in basket"
+             :key="order.id"
+             :src="order.image_path"
+             @click="toggle_cart(order.id)"
+             > Корзина </a>
+          </div>
+          <div class="footer__authors">
+            <span> Создано в веб-студии </span>
+            <a href="" class="link--underlined">TrackSky</a>
+          </div>
+      </div>
+      <div class="dialog" v-if="opened_product">
+        <div class="dialog__merch">
+          <div class="dialog__merch-container">
+            <div class="dialog__merch-column">
+              <img class="dialog__merch-image" :src="opened_product.image_path" alt="">
+            </div>
+            <div class="dialog__merch-column">
+              <span class="dialog__close" @click="toggle_dialog(opened_product.id)">Закрыть</span>
+              <div class="dialog__merch-info">
+                <div class="merch-info__title">
+                  <span v-text="opened_product.title"></span>  
+                </div>
+                <div class="merch-info__price">
+                  <span v-text="opened_product.price.toLocaleString() + ' ₸'"></span>  
+                </div>
+                <div class="merch-info__description">
+                  <span v-text="opened_product.description"></span>  
+                </div>
+              </div>
+              <div class="dialog__merch-controls">
+                <div class="merch-controls__size-container">
+                  <div class="merch-controls__size" 
+                    :class="{ 'merch-controls__size--selected': size.is_selected }"
+                    v-for="size in sizes" 
+                    :key="size.id" 
+                    @click="select_size(size.id)">
+                    <span v-text="size.value"></span> 
+                  </div>
+                </div>
+                <div class="merch-controls__basket-container">
+                  <div class="merch-controls__basket-row">
+                    <div class="merch-controls__sum">
+                      <a @click="decrementValue" class="button_dec">-</a>{{counter}}<a @click="incrementValue" class="button_inc">+</a>
+                    </div>
+                    <div class="merch-controls__basket">
+                      <span v-model="message" @click = "addProductToBasket">{{message ? message : "no content"}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dialog" v-if="opened_basket">
+        <div class="dialog__merch">
+          <div class="dialog__merch-container">
+            <div class="dialog__merch-column">
+              <span class="dialog__header">Корзина</span>
+              <div class="dialog__">
+
+              </div>
+            </div>
+            <div class="dialog__merch-column">
+              <span class="dialog__close" @click="toggle_cart(opened_basket.id)">Закрыть</span>
+            <div class="dialog__cart-table"> 
+              <tr>
+                <td>
+                  djasjjdjas
+                </td>
+              </tr>
+            </div>
+            <div class="merch-controls__basket">
+              <span v-model="message" @click = "toggle_order(opened_basket)">{{message1 ? message1 : "no content"}}</span>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dialog" v-if="opened_basket">
+        <div class="dialog__merch">
+          <div class="dialog__merch-order-container">
+            <div class="dialog__order-header">
+              <span class="dialog__header">Корзина</span>
+              <span class="dialog__close" @click="toggle_cart(opened_basket.id)">Закрыть</span>
+            </div>
+            <div class="dialog__merch-order">
+              <div class="dialog__cart-table">
+                <table> 
+                <tr>
+                  <th>
+                    Описание
+                  </th>
+                  <th>
+                    Кол-во
+                  </th>
+                  <th>
+                    Цена
+                  </th>
+                  <th>
+                    Стоимость
+                  </th>
+                </tr>
+                <tr>
+                  <td>
+                    <img class="dialog__order-image" :src="opened_basket.image_path" alt="">
+                   {{basket[1].title}}
+                  </td>
+                  <td>
+                    10 шт
+                  </td>
+                  <td>
+                    1500
+                  </td>
+                  <td>
+                    15000
+                  </td>
+                </tr>
+                <tr class="table__cart-row">
+                  <td>
+                    <img class="dialog__order-image" :src="opened_basket.image_path" alt="">
+                    {{basket[2].title}}
+                  </td>
+                  <td>
+                    {{basket[1].counter}}
+                  </td>
+                  <td>
+                    {{basket[1].price}}
+                  </td>
+                  <td>
+                    15000
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img class="dialog__order-image" :src="opened_basket.image_path" alt="">
+                    Футболка
+                  </td>
+                  <td>
+                    10 шт
+                  </td>
+                  <td>
+                    1500
+                  </td>
+                  <td>
+                    15000
+                  </td>
+                </tr>
+              </table>
+              </div>
+            </div>
+            <div class="dialog__merch-footer">
+              <div class="footer__total">
+                <span>Итог:</span>
+                <p> 19 800 </p>
+              </div>
+              <div class="merch-controls__basket-order">
+                <span v-model="message" @click = "toggle_order(opened_basket)">{{message1 ? message1 : "no content"}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src = "assets/js/ik_merch.js"></script>
+  </body>
+</html>

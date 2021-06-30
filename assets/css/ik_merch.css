@@ -1,0 +1,268 @@
+.merch {
+    margin: 24px 0;
+    width: 100%;
+}
+.merch__container {
+    padding: 54px 0 48px 0;
+}
+.merch__row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.merch__element {
+    height: 280px;
+    width: 280px;
+    margin: 0 12px;
+    margin-top: 24px;
+    cursor: pointer;
+}
+.merch__row  .merch__element:first-child {
+    margin-left: 0;
+  }
+  
+  .merch__row  .merch__element:last-child {
+    margin-right: 0;
+  }
+  
+.merch__pagination {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    line-height: 18px;
+    text-align: center;
+    justify-content: center;
+}
+.merch__nav-element {
+  color: #fff;
+  float: left;
+  padding: 0px 16px;
+  text-align: center;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+ }
+  /* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+ }
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  } 
+#ex1 {
+    color: rgb(0, 0, 0);
+}
+.product__name {
+    float: left;
+}
+
+.dialog {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+}
+
+.dialog__merch {
+  background: #fff;
+  color: #000;
+  max-width: 960px;
+  max-height: 520px;
+}
+
+.dialog__merch-container {
+  padding: 20px;
+  display: flex;
+}
+
+.dialog__merch-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.dialog__merch-column:last-child {
+  margin-left: 72px;
+} 
+
+.dialog__merch-image {
+  width: 480px;
+  height: 480px;
+}
+
+.dialog__close {
+  cursor: pointer;
+  margin-left: auto;
+  text-decoration: underline;
+}
+
+.merch-info__title {
+  margin-top: 40px;
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.merch-info__price {
+  margin-top: 16px;
+  font-size: 36px;
+  line-height: 36px;
+}
+
+.merch-info__description {
+  margin-top: 16px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.dialog__merch-controls {
+  margin-top: 138px;
+}
+
+.merch-controls__size {
+  cursor: pointer;
+  width: 40px;
+  height: 32px;
+  background-color: #fff;
+  border: 1px solid #000;
+  margin: 0 3px;
+  padding: 9px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.merch-controls__size-container {
+  display: flex;
+}
+
+.merch-controls__size:first-child {
+  margin-left: 0;
+}
+
+.merch-controls__size:last-child {
+  margin-right: 0;
+}
+
+.merch-controls__size--selected {
+  background-color: #000;
+  color: #fff;
+}
+.merch-controls__sum {
+  cursor: pointer;
+  width: 96px;
+  height: 48px;
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 9px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.merch-controls__basket-container {
+  margin-top: 24px;
+}
+.merch-controls__basket-row{
+  display: flex;
+  flex-direction: row;
+}
+.merch-controls__basket {
+  cursor: pointer;
+  width: 128px;
+  height: 48px;
+  background-color: #000;
+  border: 1px solid #000;
+  padding: 9px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+.button_inc {
+ margin-left: 16px;
+ color: #000!important;
+ font-size: 16px;
+}
+.button_dec {
+  margin-right: 16px;
+  color: #000!important;
+  font-size: 16px;
+ }
+.dialog__header {
+  font-size: 24px;
+}
+.dialog__order-image {
+  width: 80px;
+  height: 80px;
+  margin-right: 32px;
+}
+.dialog__order-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.dialog__merch-order{
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px;
+  margin-bottom: 70px;
+}
+.dialog__merch-order-container {
+  padding: 40px;
+}
+.table__cart-row {
+  margin: 0 20px;
+}
+.dialog__cart-table {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 42px;
+}
+.dialog__merch-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.merch-controls__basket-order {
+  cursor: pointer;
+  width: 200px;
+  height: 48px;
+  background-color: #000;
+  border: 1px solid #000;
+  padding: 9px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
