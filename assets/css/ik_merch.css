@@ -103,7 +103,18 @@
   max-width: 960px;
   max-height: 520px;
 }
-
+.dialog__order {
+  background: #fff;
+  color: #000;
+  max-width: 858px;
+  max-height: 628px;
+}
+.dialog__succes {
+  background: #fff;
+  color: #000;
+  max-width: 560px;
+  max-height: 320px;
+}
 .dialog__merch-container {
   padding: 20px;
   display: flex;
@@ -297,4 +308,399 @@
 .cart__product-cell {
   display: flex;
   align-items: center;
+}
+.dialog__cart-footer{
+  margin-top: 70px;
+}
+.cart__footer-button {
+  cursor: pointer;
+  width: 200px;
+  height: 48px;
+  background-color: #000;
+  border: 1px solid #000;
+  padding: 9px 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+.cart__header-title {
+  font-size: 24px;
+  line-height: 24px;
+}
+.cart__footer-amount {
+  display: flex;
+  flex-direction: column;
+}
+.footer__amount-label {
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.footer__amount-value {
+  font-size: 24px;
+  line-height: 24px;
+  margin-top: 8px;
+}
+.dialog__cart-rowheader {
+font-weight: bold;
+font-size: 10px;
+line-height: 10px;
+letter-spacing: 0.1em;
+text-transform: uppercase;
+color: #EAEAEA;
+}
+thead {
+  border-bottom: 1px #EAEAEA;
+}
+hr {
+width: 634px;
+height: 1px;
+left: 366px;
+top: 344px;
+color: #EAEAEA;
+background: #EAEAEA;
+border: none;
+}
+.dialog__order-container {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+.personal__header {
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 16px;
+}
+.dialog__order-personal {
+  display: flex;
+  flex-direction:column;
+  margin-top: 48px;
+}
+.dialog__order-body {
+  display: flex;
+  flex-direction: column;
+}
+.personal__row {
+  display: flex;
+  flex-direction: row;
+  margin-top: 12px;
+}
+.personal__column {
+  display: flex;
+  flex-direction: column;
+  margin: 0 24px 0 0;
+}
+.personal__field {
+  width: 240px;
+  height: 48px;
+}
+.personal__subheader {
+  font-size: 14px;
+  line-height: 14px;
+}
+.dialog__order-delivery{
+  margin-top: 32px;
+}
+.dialog__order-payment {
+  margin-top: 32px;
+}
+.payment__ratio {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+}
+.delivery__field {
+  width: 768px;
+  height: 48px;
+}
+.delivery__column {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+.payment__ratio-elem {
+  display: flex;
+  flex-direction: row;
+}
+.dialog__succes-container {
+  padding: 100px;
+}
+.dialog__succes-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.succes__header-title {
+  font-size: 36px;
+  line-height: 36px;
+}
+.succes__close {
+  text-decoration: underline;
+  font-size: 14px;
+  line-height: 14px;
+  margin-top: 32px;
+  cursor: pointer;
+}
+.payment__checked {
+  padding-left: 10px;
+}
+
+.payment__check-elem {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+.container:hover input ~ .checkmark {
+  background-color: #eee;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #000;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+ 	top: 7px;
+	left: 7px;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background: white;
+}
+.dialog__order-footer {
+  margin-top: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 768px){
+
+  .dialog__merch-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  .dialog__merch-image {
+    max-width: 224px;
+    max-height: 224px;
+    order: 2;
+  }
+  .dialog__merch {
+    max-height: 700px ;
+    max-width: 272px ;
+  }
+  .dialog__close {
+    order: 1;
+  }
+  .dialog__merch-info {
+    order: 3;
+  }
+  .dialog__merch-controls {
+    order: 4;
+  }
+  .dialog__merch-info {
+    text-align: left;
+  }
+  .dialog__merch-column:last-child {
+    margin-left: 0px;
+  }
+  .dialog__merch-controls {
+    margin-top: 48px;
+    align-items: center;
+  }
+  .merch-controls__sum {
+    order: 1;
+    width: 224px;
+    height: 48px;
+  }
+  .merch-controls__basket-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .merch-controls__basket {
+    order: 2;
+    width: 224px;
+    height: 48px;
+    margin-top: 8px;
+  }
+  .merch-controls__basket-row {
+    flex-direction: column;
+  }
+  .button_dec {
+    margin-right: 75px;
+  }
+  .button_inc {
+    margin-left: 75px;
+  }
+  .dialog__order {
+    max-height: 900px ;
+    max-width: 300px ;
+  }
+  .dialog__order-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  .dialog__order-header {
+    flex-direction: column;
+  }
+  .personal__row {
+    flex-direction: column;
+  }
+  .dialog__order-footer {
+    flex-direction: column;
+    align-items: center;
+  }
+  .dialog__order-header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .cart__header-title {
+    order: 1
+  }
+  .dialog__close {
+    order: 2;
+  }
+  .delivery__field {
+    max-width: 240px;
+    max-height: 48px;
+  }
+  .dialog__close {
+    margin-left: 0px;
+    margin-top: 2px;
+  }
+  .dialog__cart {
+    max-height: 600px ;
+    max-width: 272px ;
+  }
+  .cart__product-image {
+    width: 80px;
+    height: 80px;
+  }
+  .dialog-cart-row {
+    flex-direction: column;
+  }
+  td {
+    display: flex;
+    flex-direction: column;
+  }
+  thead {
+    z-index: 0;
+  }
+  .dialog__cart-footer {
+    margin-top: 20px;
+  }
+  .merch__row {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .merch__container {
+    max-width: 273px;
+    max-height: 610px;
+  }
+  .merch__element {
+    width: 128px;
+    height: 128px;
+  }
+  .dialog__cart-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+  .dialog__cart-row {
+    flex-direction: column;
+  }
+  .dialog__cart-footer {
+    flex-direction: column;
+  }
+  .dialog__cart-header {
+    flex-direction: column;
+  }
+  .dialog__cart-table {
+    flex-direction: column;
+  }
+  .footer {
+    margin-top: 15%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+  }
+  .footer__social-links {
+    display: flex;
+    align-items: center;
+    order: 1;
+  }
+
+  .footer__menu-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15%;
+    margin: 0;
+    order: 0;
+    margin-bottom: 54px;
+  }
+
+  .footer__menu-link {
+    display: flex;
+    margin-bottom: 54px;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .footer__authors {
+    display: flex;
+    font-size: 12px;
+    line-height: 12px;
+    text-align: center;
+    order: 2;
+    margin-top: 54px;
+    margin-bottom: 21px;
+  }
 }

@@ -105,6 +105,8 @@ const app = new Vue({
     cart: [],
     amount: 1,
     is_cart_open: false,
+    is_order_open: false,
+    is_order_succes: false,
   },
   computed: {
     opened_product() {
@@ -152,6 +154,12 @@ const app = new Vue({
     },
     toggle_cart() {
       this.is_cart_open = !this.is_cart_open;
+    },
+    toggle_order() {
+      this.is_order_open = !this.is_order_open;
+    },
+    toggle_succes() {
+      this.is_order_succes = !this.is_order_succes;
     }
   },
 });

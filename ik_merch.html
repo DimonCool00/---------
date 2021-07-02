@@ -50,7 +50,7 @@
         </div>
         <div class="footer__menu-links">
           <a class="footer__menu-link" href="ik_about.html"> О группе </a>
-          <a class="footer__menu-link" href="#"> Мерч </a>
+          <a class="footer__menu-link" href="ik_merch.html"> Мерч </a>
           <a class="footer__menu-link" href="#"> Музыка </a>
           <a class="footer__menu-link" href="ik_media.html"> Медиа </a>
           <a class="footer__menu-link" href="ik_contact.html"> Контакты </a>
@@ -61,7 +61,7 @@
           <a href="" class="link--underlined">TrackSky</a>
         </div>
       </div>
-      <div class="dialog" v-if="opened_product || is_cart_open">
+      <div class="dialog" v-if="opened_product || is_cart_open || is_order_open || is_order_succes">
         <div class="dialog__merch" v-if="opened_product">
           <div class="dialog__merch-container">
             <div class="dialog__merch-column">
@@ -118,10 +118,11 @@
               <table class="dialog__cart-table" v-if="cart.length">
                 <thead>
                   <tr class="dialog__cart-row">
-                    <th>Описание</th>
-                    <th>Кол-во</th>
-                    <th>Цена</th>
-                    <th>Стоимость</th>
+                    <th class="dialog__cart-rowheader">Описание</th>
+                    <th class="dialog__cart-rowheader">Кол-во</th>
+                    <th class="dialog__cart-rowheader">Цена</th>
+                    <th class="dialog__cart-rowheader">Стоимость</th>
+                    <hr>
                   </tr>
                 </thead>
                 <tbody>
@@ -141,8 +142,11 @@
                     <td>
                       <span>{{ calculate_product_price(product) }} ₸</span>
                     </td>
+                    <hr>
                   </tr>
+                  <hr>
                 </tbody>
+                <hr>
               </table>
               <span v-else>Корзина пуста</span>
             </div>
@@ -152,8 +156,103 @@
                 <span class="footer__amount-value">{{cart_total_amount}} ₸</span>
               </div>
               <div class="cart__footer-button">
-                <span>Начать оформление</span>
+                <span @click = "toggle_order(),toggle_cart()">Начать оформление</span>
               </div>
+            </div>
+          </div>
+        </div>
+        <div class="dialog__order" v-else-if="is_order_open">
+          <div class="dialog__order-container">
+            <div class="dialog__order-header">
+              <span class="cart__header-title">Оформление заказа</span>
+              <span class="dialog__close" @click="toggle_order()">Закрыть</span>
+            </div>
+            <div class="dialog__order-body">
+              <form method="" action="">
+                  <div class="dialog__order-personal">
+                    <span class="personal__header">Личные данные</span>
+                    <div class="personal__row">
+                      <div class="personal__column">
+                        <label>
+                          <span class="personal__subheader">Имя</span>
+                        </label>
+                          <input type="text" name="fname" class="personal__field">
+                      </div>
+                      <div class="personal__column">
+                          <label class="personal__column">
+                            <span class="personal__subheader">Фамилия</span>
+                          </label>
+                            <input type="text" name="fname" class="personal__field">
+                      </div>
+                      <div class="personal__column">
+                            <label class="personal__column">
+                              <span class="personal__subheader">E-mail</span>
+                            </label>
+                              <input type="text" name="fname" class="personal__field">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dialog__order-delivery">
+                    <span class="personal__header">Данные для доставки</span>
+                    <div class="personal__row">
+                      <div class="personal__column">
+                        <label>
+                          <span class="personal__subheader">Имя</span>
+                        </label>
+                          <input type="text" name="fname" class="personal__field">
+                      </div>
+                      <div class="personal__column">
+                          <label class="personal__column">
+                            <span class="personal__subheader">Фамилия</span>
+                          </label>
+                            <input type="text" name="fname" class="personal__field">
+                      </div>
+                      <div class="personal__column">
+                            <label class="personal__column">
+                              <span class="personal__subheader">E-mail</span>
+                            </label>
+                              <input type="text" name="fname" class="personal__field">
+                      </div>
+                    </div>
+                      <div class="delivery__column">
+                        <label class="personal__column">
+                          <span class="personal__subheader">Адрес (улица, дом, корпус, квартира)</span>
+                        </label>
+                          <input type="text" name="fname" class="delivery__field">
+                      </div>
+                  </div>
+                  <div class="dialog__order-payment">
+                    <span class="personal__header">Способ оплаты</span>
+                    <div class="payment__ratio">
+                      <div class="payment_ratio-elem">
+                        <label for="radioButton1" class="container">Банковской картой
+                          <input type="radio" class="payment__check-elem" checked = "checked">
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                      <div class="payment_ratio-elem">
+                        <label for="radioButton1" class="container">Kaspi.kz
+                          <input type="radio" class="payment__check-elem">
+                          <span class="checkmark"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+             </form>
+            </div>
+            <div class="dialog__order-footer">
+              <div class="cart__footer-button">
+                <span @click = "toggle_order(),toggle_succes()">Оформить заказ</span>
+              </div>
+              <span class="dialog__close" @click="toggle_order(),toggle_cart()">Вернуться к корзине</span>
+            </div>
+          </div>
+        </div>
+        <div class="dialog__succes" v-else-if="is_order_succes">
+          <div class="dialog__succes-container">
+            <div class="dialog__succes-header">
+              <span class="succes__header-title">Ваш заказ оформлен</span>
+              <span class="succes__close" @click="toggle_succes()">Закрыть</span>
             </div>
           </div>
         </div>

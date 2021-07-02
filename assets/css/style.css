@@ -6,7 +6,7 @@
 
 html {
   width: 100%;
-  background: url('/assets/images/back1.png') no-repeat center center fixed;
+  background: url('../images/back1.png') no-repeat center center fixed;
   background-size: cover;
   color: #fff;
   font-family: 'HelveticaNeueCyr', sans-serif;
@@ -49,7 +49,7 @@ body {
   display: flex;
   justify-content: center;
   text-align: center;
-  height: 438px;
+  height: 590px;
 }
 /*------------About Page */
 .main__header {
@@ -71,46 +71,55 @@ body {
 }
 /*--------------------Contacts Page*/
 .contact__1 {
-  width: 532px;
-  height: 190px;
-  display: block;
+  max-width: 532px;
+  max-height: 190px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .manager__name {
   font-size: 24px;
   line-height: 24px;
+  margin-top: 12px;
 }
 .manager__dep {
   font-size: 16px;
   line-height: 16px;
+  margin-top: 24px;
 }
 .manager__phone {
   font-size: 48px;
   line-height: 48px;
+  margin-top: 24px;
 }
 .manager__email {
   font-size: 48px;
   line-height: 48px;
+  margin-top: 32px;
 }
 .contact__2 {
-  height: 96px;
-  display: block;
+  max-height: 96px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  margin-top: 72px;
 }
 .booking {
   font-size: 24px;
   line-height: 24px;
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 .booking__phone {
   font-size: 48px;
   line-height: 48px;
+  margin-top: 32px;
 }
 .contact__social {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 24px;
-  margin-top: 40px;
+  margin-top: 72px;
 }
 /*------------------------Footer*/
 .footer {
@@ -327,5 +336,26 @@ a {
   .footer__menu-link1:last-child {
     flex-basis: 15%;
     flex-shrink: 0;
+  }
+  .contact__1 {
+    max-width: 300px;
+  }
+  .manager__name,
+  .manager__dep,
+  .manager__phone,
+  .manager__email {
+    font-size: 24px;
+    align-items: center;
+  }
+  .contact__2 {
+    max-width: 250px;
+  }
+  .booking {
+    font-size: 20px;
+    align-items: center;
+  }
+  .booking__phone {
+    font-size: 24px;
+    align-items: center;
   }
 }
